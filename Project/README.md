@@ -32,5 +32,21 @@ Run ECE656_Project.py
 
 8. Press the "Predict Class" button to predict if the selected player will be nominated to the Hall Of Fame. This will also show the real outcome (Class) of the sample.
 
+
+
+
+## Data Preprocessing:
+
+Sanity checks where performed in the database, and errors in the database where encountered:
+Players that won the hall of fame award did not have their respective batting/pitching/manager statistics for that particular year, e.g. the player aaronha01 was inducted into the Hall Of Fame (HOF) in 1982 but does not have any statistics for that particular year. Another example can be seen with the player abbotji01, which was nominated in 2005 but there are no Batting/Pitching/Managers statistics for this particular player.
+
+If the correct combination of playerID and yearID was performed, e.g. a join between the Batting and the HOF table was performed using both playerID and yearID, it was only possible to obtain statistics for one player inducted into the Hall of Fame and 26 that were nominated but were not inducted. Due to this, it was decided to better use the average of the statistics of each player and compare it with the induction into the HOF. With this, two classes were created: the players who were nominated to the HOF (both inducted and just nominated, so those who are present on the HOF table) and those not nominated to the HOF (and thus not present in the HOF table).
+
+Categorization:
+Most features on the database are numeric and they had to be transformed into categories.
+It was decided for practical uses to divide each feature into two categories based on the median. The average was not chosen because most of the features were found to be highly skewed. This way every player would have a feature either above the median or under the median.
+
+
+
    
 
