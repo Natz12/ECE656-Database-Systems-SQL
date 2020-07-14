@@ -2,3 +2,4 @@
 Class Exercises, Tutorials and Assignments
 
 SQL
+
