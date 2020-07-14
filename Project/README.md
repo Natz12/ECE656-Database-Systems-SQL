@@ -7,6 +7,7 @@ Setup:
 2. Run the Procedures.sql file in order to create the required stored procedures for the Database.
 
 -- The required python packages can be found in the requirements.txt file located within this project's folder.
+
 To automatically install these dependencies the following command can be used:
    pip install -r requirements.txt
    
