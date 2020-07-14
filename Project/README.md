@@ -46,6 +46,31 @@ Categorization:
 Most features on the database are numeric and they had to be transformed into categories.
 It was decided for practical uses to divide each feature into two categories based on the median. The average was not chosen because most of the features were found to be highly skewed. This way every player would have a feature either above the median or under the median.
 
+## Stored Procedures:
+
+ColumnIdentifier: It receives the name of the table chosen by the user in the Client and based on that returns a list of features for the user to pick for the creation of the classifier.
+
+TableCreation: It receives the names of the features that will be used for the classification and generates a table with only the features selected by the client and a column indicating if the player is present on the HallOfFame table.
+
+SplitData: It receives the train size percentage selected by the client and randomly splits the table into test and train tables preserving the positive and negative proportions.
+
+IterCategorical: Receives the table name (Train). It identifies the columns that the table has, creates an empty `Medians` table, and iterates over the detected columns. By calling the Median stored procedure it calculates the median of the feature. This value is then sent to a `Medians` table which is created populated by the InsertMedians stored procedure.
+
+MapCategorical: It receives the name of the table (Test or Train) and the name of the table in which to store the mapping. It copies the original table into the new table and calls a stored procedure named Threshold. This Threshold procedure categorizes each player's statistics from the selected features into 1 if they are greater than the median or 0 if they are equal to or lesser than the median.
+
+ProbTable: Receives the name of the table (Train) and creates the probability table based on that table's selected features. The `Prob` table contains the different probabilities needed to compute the naive Bayes classifier. To populate this table, the procedure iterates over the selected features while calling a secondary stored procedure (i.e. Insert_Prob), which in turn calculates the previously mentioned probabilities.
+
+IterNB: Computes the resulting probability of each sample from the Test set to be a candidate for the HallOfFame. It does so by iterating over the column and with the help of the PredictNB stored procedure it multiplies and divides by the corresponding probability. It also selects and stores the predicted class.
+
+MasterProcedure: Receives the features chosen by the client, the total number of features that were chosen and the train-test split percentage selected by the user. Controls and runs the former mentioned procedures except ColumnIdentifier.
+
+GetTest: Returns the playerID of all the samples from the testing set. This way the Client can display it for the user to choose which sample to inspect closer.
+
+GetTestData: Returns the feature values stored for the specific playerID selected by the user.
+
+GetClass: Receives the playerID and if it wants the real class or the predicted class. Returns the corresponding class for the specific playerID selected by the user.
+
+
 
 
    
