@@ -2,7 +2,7 @@ This program tries to predict the probability of a player being nominated to the
 
 Setup:
 -- MYSQL
-1. In MySQL, run the DBCreation.sql file in order to create a new Lahman Baseball database with the name ProjectNB.
+1. In MySQL, run the lahman-mysql-dump.sql file in order to create a new Lahman Baseball database with the name ProjectNB. (lahman-mysql-dump.sql can be obtained from http://www.seanlahman.com/baseball-archive/statistics/)
 
 2. Run the Procedures.sql file in order to create the required stored procedures for the Database.
 
